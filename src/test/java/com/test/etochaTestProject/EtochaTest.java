@@ -1,4 +1,7 @@
 package com.test.etochaTestProject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.AfterTest;
@@ -54,6 +57,9 @@ public class EtochaTest extends pageObjects {
 			stepStatus = testSteps.fnAddToCartProduct(strDataSheet, "Order_TC_1", "ProductName");
 		
 		if (pageObjects.stepStatus == true) {
+			WebDriverWait wait=new WebDriverWait(wDriver, 20);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(btnProducts)));
+			
 			fnCommLib.fnAppSync(10);
 			stepStatus = testSteps.fnAddToCartProductVerification(strDataSheet, "Order_TC_1", "ProductQuantity"); }
 
